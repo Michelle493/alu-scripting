@@ -1,15 +1,15 @@
 #!/usr/bin/python3
-"""Print titles of first 10 hot posts of a subreddit."""
+"""Query Reddit API and print the titles of the first 10 hot posts."""
 
 import requests
 
 
 def top_ten(subreddit):
-    """Query Reddit API and print first 10 hot posts."""
+    """Print titles of the first 10 hot posts of a subreddit."""
 
     url = "https://api.reddit.com/r/{}/hot".format(subreddit)
     headers = {
-        "User-Agent": "python:api.advanced:v1.0 (by /u/alu_student)"
+        "User-Agent": "python:api.advanced:v1.0 (by /u/student)"
     }
     params = {"limit": 10}
 
@@ -25,10 +25,15 @@ def top_ten(subreddit):
             print(None)
             return
 
-        posts = response.json().get("data", {}).get("children", [])
+        data = response.json().get("data", {})
+        posts = data.get("children", [])
+
+        if not posts:
+            print(None)
+            return
 
         for post in posts:
-            print(post.get("data", {}).get("title"))
+            print(post.get("data").get("title"))
 
     except Exception:
         print(None)
