@@ -5,10 +5,6 @@ import requests
 
 def top_ten(subreddit):
     """Print titles of first 10 hot posts for given subreddit."""
-    if subreddit is None or not isinstance(subreddit, str):
-        print("OK")
-        return
-
     url = "https://www.reddit.com/r/{}/hot.json".format(subreddit)
     headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'}
     params = {'limit': 10}
@@ -19,10 +15,12 @@ def top_ten(subreddit):
         if response.status_code == 200:
             data = response.json()
             posts = data.get('data', {}).get('children', [])
-            for post in posts:
-                print(post.get('data', {}).get('title'))
-            print("OK")  # Print OK after printing posts
+            if posts:
+                for post in posts:
+                    print(post.get('data', {}).get('title'))
+            else:
+                print(None)
         else:
-            print("OK")  # Print OK for invalid subreddit
+            print(None)
     except:
-        print("OK")  # Print OK for any error
+        print(None)
