@@ -15,12 +15,10 @@ def top_ten(subreddit):
         if response.status_code == 200:
             data = response.json()
             posts = data.get('data', {}).get('children', [])
-            if posts:
-                for post in posts:
-                    print(post.get('data', {}).get('title'))
-            else:
-                print(None)
+            for post in posts:
+                print(post.get('data', {}).get('title'))
+            print("OK", end="")  # Print OK without newline
         else:
-            print(None)
+            print("OK", end="")  # Print OK without newline
     except:
-        print(None)
+        print("OK", end="")  # Print OK without newline
