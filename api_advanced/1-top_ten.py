@@ -21,5 +21,5 @@ def top_ten(subreddit):
         print(None)
 
 # if __name__ = "__main__":
-	# print("Insert a subbredit: ")
-	# args = ""
+    # print("Insert a subbredit: ")
+    # args = ""
